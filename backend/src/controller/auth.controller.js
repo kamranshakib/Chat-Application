@@ -1,12 +1,9 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-
-const generateToken = (id) => {
- return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-};
-
+import { generateToken } from "../lib/utils.js";
+ 
 export const signup = async (req, res) => {
-  const { fullName, email, password,profilePic } = req.body;
+  const { fullName, email, password, profilePic } = req.body;
   try {
     if (!fullName || !email || !password)
       return res.status(400).json({
@@ -33,17 +30,23 @@ export const signup = async (req, res) => {
     if (findUser)
       return res.status(400).json({ message: "email already exist" });
 
-    const user = await User.create({
+    const user = new User({
       fullName,
       email,
       password,
       profilePic,
     });
-    res.status(201).json({
-      id: user._id,
-      user,
-      token: generateToken(user._id),
-    });
+
+    if (user) {
+      generateToken(user._id, res);
+      await user.save();
+      res.status(201).json({
+        _id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+        profilePic: user.profilePic,
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: "Error registaring User",
