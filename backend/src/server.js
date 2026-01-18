@@ -1,9 +1,11 @@
+// import modules
 import express from "express"
 import dotenv from "dotenv"
 import path from "path"
 import {connectDB} from "./lib/db.js"
 
 
+// import routes
 import authRoute from "./routes/auth.routes.js"
 import messageRoute from "./routes/message.routes.js"
 
@@ -12,10 +14,13 @@ const app = express();
 const PORT = process.env.PORT || 5000
 const __dirname = path.resolve();
 
+// middleware
+app.use(express.json())
 app.use("/api/auth",authRoute)
 app.use("/api/message",messageRoute)
 
 
+// conneted with frontend
 if(process.env.NODE_ENv === "production"){
     app.use(express.static(path.join(__dirname, "/frontend/dist")))
 
@@ -23,6 +28,7 @@ if(process.env.NODE_ENv === "production"){
         res.sendFile(__dirname, "/frontend","index.html")
     })
 }
+
 
  app.listen(PORT,() =>{
     console.log(`Server listen on port ${PORT}`)
