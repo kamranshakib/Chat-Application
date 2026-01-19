@@ -1,6 +1,8 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
+import { ENV } from "../lib/env.js";
 import { generateToken } from "../lib/utils.js";
+import { sendWelcomeEmail } from "../emails/emailHandlers.js";
  
 export const signup = async (req, res) => {
   const { fullName, email, password, profilePic } = req.body;
@@ -52,6 +54,15 @@ export const signup = async (req, res) => {
         profilePic: user.profilePic,
         
       });
+
+      // todo: send a welcome email to user 
+      try {
+        await sendWelcomeEmail(savedUser.email, savedUser.fullName,ENV.CLIENT_URL)
+        
+      } catch (error) {
+        console.error("Failed to send welcome email: ", error)
+        
+      }
     }
   } catch (error) {
     res.status(500).json({

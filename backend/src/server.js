@@ -3,6 +3,7 @@ import express from "express"
 import dotenv from "dotenv"
 import path from "path"
 import {connectDB} from "./lib/db.js"
+import { ENV } from "./lib/env.js"
 
 
 // import routes
@@ -10,8 +11,9 @@ import authRoute from "./routes/auth.routes.js"
 import messageRoute from "./routes/message.routes.js"
 
 dotenv.config()
+
 const app = express();
-const PORT = process.env.PORT || 5000
+const PORT = ENV.PORT || 5000
 const __dirname = path.resolve();
 
 // middleware
@@ -21,7 +23,7 @@ app.use("/api/message",messageRoute)
 
 
 // conneted with frontend
-if(process.env.NODE_ENv === "production"){
+if(ENV.NODE_ENv === "production"){
     app.use(express.static(path.join(__dirname, "/frontend/dist")))
 
     app.use("*",(_,res)=>{
