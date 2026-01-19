@@ -8,6 +8,7 @@ export const signup = async (req, res) => {
     if (!fullName || !email || !password)
       return res.status(400).json({
         message: "All fields are required!",
+        
       });
 
     // cheak paaword is least then 6
@@ -35,7 +36,7 @@ export const signup = async (req, res) => {
       email,
       password,
       profilePic,
-    });
+    }); 
 
     if (user) {
       generateToken(user._id, res);
@@ -45,6 +46,7 @@ export const signup = async (req, res) => {
         fullName: user.fullName,
         email: user.email,
         profilePic: user.profilePic,
+        
       });
     }
   } catch (error) {
