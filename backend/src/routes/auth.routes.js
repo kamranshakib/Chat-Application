@@ -1,13 +1,18 @@
 import express from "express";
 const Router = express.Router();
-import { login, logout, signup } from "../controller/auth.controller.js";
+import { login, logout, signup, updateProfile } from "../controller/auth.controller.js";
 import User from "../models/User.js";
+import { protectRoute } from "../middleware/auth.middleware.js";
 
-Router.post("/signup", signup);
+Router.post("/signup", signup); 
 
 Router.post("/login", login);
 
 Router.post("/logout", logout);
+Router.put("/update-profile",protectRoute,updateProfile)
+Router.get("/cheak",protectRoute,(req,res)=>{
+    res.status(200).json(req.user)
+})
 
 // for testing sender email
 Router.get("/delete-email", async (req,res)=>{
