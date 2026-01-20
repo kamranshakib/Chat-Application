@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import path from "path"
 import {connectDB} from "./lib/db.js"
 import { ENV } from "./lib/env.js"
+import cookieParser from "cookie-parser"
 
 
 // import routes
@@ -17,13 +18,14 @@ const PORT = ENV.PORT || 5000
 const __dirname = path.resolve();
 
 // middleware
+app.use(cookieParser())
 app.use(express.json())
 app.use("/api/auth",authRoute)
 app.use("/api/message",messageRoute)
 
 
 // conneted with frontend
-if(ENV.NODE_ENv === "production"){
+if(ENV.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname, "/frontend/dist")))
 
     app.use("*",(_,res)=>{
