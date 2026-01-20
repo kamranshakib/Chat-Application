@@ -10,7 +10,7 @@ Router.post("/login", login);
 
 Router.post("/logout", logout);
 Router.put("/update-profile",protectRoute,updateProfile)
-Router.get("/cheak",protectRoute,(req,res)=>{
+Router.get("/check",protectRoute,(req,res)=>{
     res.status(200).json(req.user)
 })
 
