@@ -5,9 +5,9 @@ import User from "../models/User.js";
 
 Router.post("/signup", signup);
 
-Router.get("/login", login);
+Router.post("/login", login);
 
-Router.get("/logout", logout);
+Router.post("/logout", logout);
 
 // for testing sender email
 Router.get("/delete-email", async (req,res)=>{
@@ -27,4 +27,4 @@ Router.get("/delete-email", async (req,res)=>{
         
     }
 })
-export default Router;
+export default Router; 
