@@ -8,7 +8,7 @@ export const generateToken = (id, res) => {
     { expiresIn: "7d" });
 
    res.cookie("jwt",token,{
-    maxAge:  7 * 24 * 60 * 60  * 1000, // Seven day
+    maxAge:  7 * 24 * 60 * 60  * 1000, 
     httpOnly: true, // prevent XSS attack 
     sameSite: "strict" // prevent CSRF attacks
    })  
