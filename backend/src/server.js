@@ -11,7 +11,7 @@ import cookieParser from "cookie-parser"
 import authRoute from "./routes/auth.routes.js"
 import messageRoute from "./routes/message.routes.js"
 
-dotenv.config()
+dotenv.config() 
 
 const app = express();
 const PORT = ENV.PORT || 5000
@@ -25,13 +25,14 @@ app.use("/api/message",messageRoute)
 
 
 // conneted with frontend
-if(ENV.NODE_ENV === "production"){
-    app.use(express.static(path.join(__dirname, "/frontend/dist")))
 
-    app.use("*",(_,res)=>{
-        res.sendFile(__dirname, "/frontend","index.html")
-    })
-}
+// if(ENV.NODE_ENV === "production"){
+//     app.use(express.static(path.join(__dirname, "/frontend/dist")))
+
+//     app.use("*",(_,res)=>{
+//         res.sendFile(__dirname, "/frontend","index.html")
+//     })
+// }
 
 
  app.listen(PORT,() =>{
