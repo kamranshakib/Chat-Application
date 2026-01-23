@@ -39,10 +39,6 @@ export const signup = async (req, res) => {
     });
 
     if (user) {
-      // before CR;
-      // generateToken(user._id, res);
-      // await user.save();
-      // after CR
       const savedUser = await user.save();
       generateToken(savedUser._id, res);
       res.status(201).json({
@@ -51,8 +47,6 @@ export const signup = async (req, res) => {
         email: user.email,
         profilePic: user.profilePic,
       });
-
-      // todo: send a welcome email to user
       try {
         await sendWelcomeEmail(
           savedUser.email,
