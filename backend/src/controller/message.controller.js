@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Message from "../models/Message.js";
+import cloudinary from "../lib/cloudinary.js";
 
 export const getAllContacts = async (req, res) => {
   try {
@@ -14,10 +15,6 @@ export const getAllContacts = async (req, res) => {
   }
 };
 
-
-export const getAllChats = (req, res) => {
-  res.send("get all chats");
-};
 
 
 export const getMessageByUserId =async (req, res) => {
@@ -39,6 +36,39 @@ export const getMessageByUserId =async (req, res) => {
     }
  
 };
-export const sendMessage = (req, res) => {
-  res.send("send message");
+export const sendMessage = async (req, res) => {
+    try {
+        const senderId = req.user._id;
+        const {id: receiverId} = req.params;
+        const {text, image} = req.body;
+        let imageUrl ;
+        // upload image
+        if(image){
+            const uploadReponse = await cloudinary.uploader.upload(image);
+            imageUrl = uploadReponse.secure_url;
+        }
+        const newMessage = await Message({
+            senderId,
+            receiverId,
+            text,
+            image: imageUrl
+        });
+        await newMessage.save();
+        
+        //todo:   emit socket event
+
+        res.status(201).json(newMessage);
+    } catch (error) {
+        console.error("Error sending message:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+
 };
+
+
+
+
+export const getAllChats = (req, res) => {
+  res.send("get all chats");
+};
+
