@@ -6,27 +6,11 @@ import NoChatsFound from "./NoChatsFound";
 function ChatsList() {
   const { getMyChatPartners, chats, isUsersLoading, setSelectedUser } =
     useChatStore();
-    
   useEffect(() => {
     getMyChatPartners();
   }, [getMyChatPartners]);
-  
-  
-  if (isUsersLoading) {
-    return <UsersLoadingSkeleton />;
-  }
-  
-  
-  if (!chats || !Array.isArray(chats)) {
-    return <UsersLoadingSkeleton />; 
-  }
-  
-  
-  if (chats.length === 0) {
-    return <NoChatsFound />;
-  }
-  
-  
+  if (isUsersLoading) return <UsersLoadingSkeleton />;
+  if (chats.length === 0) return <NoChatsFound />;
   return (
     <>
       {chats.map((chat) => (
@@ -36,6 +20,7 @@ function ChatsList() {
           onClick={() => setSelectedUser(chat)}
         >
           <div className="flex items-center gap-3">
+          {/* TODO: FIX THIS ONLINE STATUS AND MAKE IT WORK WITH SOCKET */}
             <div className={`avatar online`}>
               <div className="size-12 rounded-full">
                 <img src={chat.profilePic || "/me.png"} alt={chat.fullName}/>
