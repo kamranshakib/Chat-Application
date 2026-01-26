@@ -39,7 +39,7 @@ export const sendMessage = async (req, res) => {
     const { text, image } = req.body;
 
     // after code rabbit
-    // validations 
+    // validations
     // at least text or image should be present
     if (!text && !image) {
       return res
@@ -71,6 +71,10 @@ export const sendMessage = async (req, res) => {
     await newMessage.save();
 
     //todo:   emit socket event
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
 
     res.status(201).json(newMessage);
   } catch (error) {
