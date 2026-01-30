@@ -1,49 +1,45 @@
 import React, { useState } from "react";
 import BorderAnimatedContainer from "../components/BoarderAnimatedContainer";
-import { Link } from "react-router-dom"; // توجه
+import { Link } from "react-router";
 import {
   MessageCircleIcon,
   LockIcon,
   MailIcon,
+  UserIcon,
   LoaderIcon,
 } from "lucide-react";
 
 function LoginPage() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
-
-  const handleSubmit = async (e) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [login, isLoggingIN] = useState();
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoggingIn(true);
-
-    try {
-      // TODO: ارسال درخواست به سرور
-      console.log("Logging in with:", formData);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoggingIn(false);
-    }
+    login(formData);
   };
-
   return (
     <div className="w-full flex items-center justify-center p-4 bg-slate-900">
       <div className="relative w-full max-w-6xl md:h-[800px] h-[650px]">
         <BorderAnimatedContainer>
           <div className="w-full flex flex-col md:flex-row">
-            {/* FORM COLUMN - LEFT */}
+            {/* FORM CULOMN - LEFT SIDE */}
             <div className="md:w-1/2 p-8 flex items-center justify-center md:border-r border-slate-600/30">
               <div className="w-full max-w-md">
+                {/* HEADING TEXT */}
                 <div className="text-center mb-8">
                   <MessageCircleIcon className="w-12 h-12 mx-auto text-slate-400 mb-4" />
                   <h2 className="text-2xl font-bold text-slate-200 mb-2">
                     Welcome Back
                   </h2>
-                  <p className="text-slate-400">Login to access your account</p>
+                  <p className="text-slate-400">
+                    Login to access to your account
+                  </p>
                 </div>
-
+                {/* FORM */}
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Email */}
+                  {/* EMAIL */}
                   <div>
                     <label className="auth-input-lable">Email</label>
                     <div className="relative">
@@ -55,13 +51,11 @@ function LoginPage() {
                           setFormData({ ...formData, email: e.target.value })
                         }
                         className="input"
-                        placeholder="your@email.com"
-                        required
+                        placeholder="saifeekhaled1212@gmail.com"
                       />
                     </div>
                   </div>
-
-                  {/* Password */}
+                  {/* PASSWORD */}
                   <div>
                     <label className="auth-input-lable">Password</label>
                     <div className="relative">
@@ -74,33 +68,30 @@ function LoginPage() {
                         }
                         className="input"
                         placeholder="Enter your password"
-                        required
                       />
                     </div>
                   </div>
-
+                  {/* SUBMIT BUTTON */}
                   <button
-                    type="submit"
                     className="auth-btn"
-                    disabled={isLoggingIn}
+                    type="submit"
+                    disabled={isLoggingIN}
                   >
-                    {isLoggingIn ? (
-                      <LoaderIcon className="w-5 h-5 animate-spin mx-auto" />
-                    ) : (
+                    {isLoggingIN ? (
                       "Sign in"
+                    ) : (
+                      <LoaderIcon className="w-full h-5 animate-spin text-center" />
                     )}
                   </button>
                 </form>
-
                 <div className="mt-6 text-center">
-                  <Link to="/signup" className="auth-link">
-                    Don't have an account? Sign Up
+                  <Link to={"/signup"} className="auth-link">
+                    Don't have an account? SignUp
                   </Link>
                 </div>
               </div>
             </div>
-
-            {/* RIGHT SIDE */}
+            {/* FORM COLUMN - RIGHT SIDE */}
             <div className="hidden md:w-1/2 md:flex items-center justify-center p-6 bg-gradient-to-bl from-slate-800/20 to-transparent">
               <div>
                 <img
