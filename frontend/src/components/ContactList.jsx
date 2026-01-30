@@ -1,28 +1,17 @@
-import React, { useEffect } from "react";
-import { useChatStore } from "../store/useChatStore";
-import UsersLoadingSkeleton from "./UsersLoadingSkeleton";
+import React, { useEffect } from 'react';
+import { useChatStore } from '../store/useChatStore';
+import UsersLoadingSkeleton from './UsersLoadingSkeleton';
+import { useAuthStore } from '../store/useAuthStore';
 
 function ContactList() {
   const { getAllContacts, allContacts, setSelectedUser, isUsersLoading } =
     useChatStore();
+    const { onlineUsers }= useAuthStore();
+    useEffect(()=>{
+      getAllContacts();
+    },[getAllContacts]);
 
-  // وقتی کامپوننت mount شد، لیست کاربران را بگیر
-  useEffect(() => {
-    getAllContacts();
-  }, [getAllContacts]);
-
-  // اگر هنوز در حال لود هستیم
-  if (isUsersLoading) return <UsersLoadingSkeleton />;
-
-  // محافظت: اگر allContacts آرایه نیست یا خالی است
-  if (!Array.isArray(allContacts) || allContacts.length === 0) {
-    return (
-      <div className="text-slate-400 text-center py-6">
-        No contacts found.
-      </div>
-    );
-  }
-
+    if(isUsersLoading) return <UsersLoadingSkeleton/>
   return (
     <>
       {allContacts.map((contact) => (
@@ -32,18 +21,14 @@ function ContactList() {
           onClick={() => setSelectedUser(contact)}
         >
           <div className="flex items-center gap-3">
-            <div className="avatar online">
+            <div
+              className={`avatar ${onlineUsers.inlcudes(contact._id) ? "online" : "offline"}`}
+            >
               <div className="size-12 rounded-full">
-                <img
-                  src={contact.profilePic || "/me.png"}
-                  alt={contact.fullName}
-                  className="object-cover w-full h-full"
-                />
+                <img src={contact.profilePic || "/me.png"} />
               </div>
             </div>
-            <h4 className="text-slate-200 font-medium truncate">
-              {contact.fullName}
-            </h4>
+            <h4 className="text-slate-200 font-medium">{contact.fullName}</h4>
           </div>
         </div>
       ))}
@@ -51,4 +36,4 @@ function ContactList() {
   );
 }
 
-export default ContactList;
+export default ContactList
