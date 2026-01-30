@@ -1,21 +1,37 @@
 import React, { useState } from 'react';
 import BorderAnimatedContainer from '../components/BoarderAnimatedContainer';
-import { Link } from 'react-router';
-import {MessageCircleIcon, LockIcon, MailIcon, UserIcon, LoaderIcon} from "lucide-react"
+import { Link } from 'react-router-dom';
+import { MessageCircleIcon, LockIcon, MailIcon, UserIcon, LoaderIcon } from "lucide-react";
 
 function SignUpPage() {
-  const [formData, setFormData] = useState({fullName: "", email: "", password: ""});
-  const [signUp, isSigningUp] = useState();
-  const handleSubmit = (e) =>{
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: ""
+  });
+  const [isSigningUp, setIsSigningUp] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signUp(formData);
+    setIsSigningUp(true);
+
+    try {
+      // TODO: ارسال فرم به سرور
+      console.log("Signing up with:", formData);
+      // می‌توانی اینجا fetch یا axios برای ثبت نام اضافه کنی
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSigningUp(false);
+    }
   }
+
   return (
     <div className="w-full flex items-center justify-center p-4 bg-slate-900">
       <div className="relative w-full max-w-6xl md:h-[800px] h-[650px]">
         <BorderAnimatedContainer>
           <div className="w-full flex flex-col md:flex-row">
-            {/* FORM CULOMN - LEFT SIDE */}
+            {/* FORM COLUMN - LEFT SIDE */}
             <div className="md:w-1/2 p-8 flex items-center justify-center md:border-r border-slate-600/30">
               <div className="w-full max-w-md">
                 {/* HEADING TEXT */}
@@ -41,9 +57,11 @@ function SignUpPage() {
                         }
                         className="input"
                         placeholder="Khaled Saifee"
+                        required
                       />
                     </div>
                   </div>
+
                   {/* EMAIL */}
                   <div>
                     <label className="auth-input-lable">Email</label>
@@ -56,10 +74,12 @@ function SignUpPage() {
                           setFormData({ ...formData, email: e.target.value })
                         }
                         className="input"
-                        placeholder="saifeekhaled1212@gmail.com"
+                        placeholder="your@email.com"
+                        required
                       />
                     </div>
                   </div>
+
                   {/* PASSWORD */}
                   <div>
                     <label className="auth-input-lable">Password</label>
@@ -73,9 +93,11 @@ function SignUpPage() {
                         }
                         className="input"
                         placeholder="Enter your password"
+                        required
                       />
                     </div>
                   </div>
+
                   {/* SUBMIT BUTTON */}
                   <button
                     className="auth-btn"
@@ -83,19 +105,21 @@ function SignUpPage() {
                     disabled={isSigningUp}
                   >
                     {isSigningUp ? (
-                      "Create Account"
+                      <LoaderIcon className="w-5 h-5 animate-spin mx-auto" />
                     ) : (
-                      <LoaderIcon className="w-full h-5 animate-spin text-center" />
+                      "Create Account"
                     )}
                   </button>
                 </form>
+
                 <div className="mt-6 text-center">
-                  <Link to={"/login"} className="auth-link">
+                  <Link to="/login" className="auth-link">
                     Already have an account? Login
                   </Link>
                 </div>
               </div>
             </div>
+
             {/* FORM COLUMN - RIGHT SIDE */}
             <div className="hidden md:w-1/2 md:flex items-center justify-center p-6 bg-gradient-to-bl from-slate-800/20 to-transparent">
               <div>
@@ -123,4 +147,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage
+export default SignUpPage;

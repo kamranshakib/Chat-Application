@@ -10,7 +10,7 @@ import User from "../models/User.js";
 import { protectRoute } from "../middleware/auth.middleware.js";
 import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 
-Router.use(arcjetProtection);
+// Router.use(arcjetProtection);
 
 Router.post("/signup", signup);
 Router.post("/login", login);

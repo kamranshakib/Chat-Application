@@ -6,11 +6,18 @@ import NoChatsFound from "./NoChatsFound";
 function ChatsList() {
   const { getMyChatPartners, chats, isUsersLoading, setSelectedUser } =
     useChatStore();
+
+  // هنگام mount کامپوننت، لیست چت‌ها را بگیر
   useEffect(() => {
     getMyChatPartners();
   }, [getMyChatPartners]);
+
+  // اگر هنوز در حال لود هستیم
   if (isUsersLoading) return <UsersLoadingSkeleton />;
-  if (chats.length === 0) return <NoChatsFound />;
+
+  // اگر chats آرایه نیست یا خالی است
+  if (!Array.isArray(chats) || chats.length === 0) return <NoChatsFound />;
+
   return (
     <>
       {chats.map((chat) => (
@@ -20,13 +27,19 @@ function ChatsList() {
           onClick={() => setSelectedUser(chat)}
         >
           <div className="flex items-center gap-3">
-          {/* TODO: FIX THIS ONLINE STATUS AND MAKE IT WORK WITH SOCKET */}
+            {/* TODO: FIX ONLINE STATUS WITH SOCKET */}
             <div className={`avatar online`}>
               <div className="size-12 rounded-full">
-                <img src={chat.profilePic || "/me.png"} alt={chat.fullName}/>
+                <img
+                  src={chat.profilePic || "/me.png"}
+                  alt={chat.fullName}
+                  className="object-cover w-full h-full"
+                />
               </div>
             </div>
-            <h4 className="text-slate-200 font-medium truncate">{chat.fullName}</h4>
+            <h4 className="text-slate-200 font-medium truncate">
+              {chat.fullName}
+            </h4>
           </div>
         </div>
       ))}

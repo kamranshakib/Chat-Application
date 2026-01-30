@@ -9,7 +9,7 @@ import { protectRoute } from "../middleware/auth.middleware.js";
 import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 const Router = express.Router();
   
-Router.use(arcjetProtection, protectRoute);
+Router.use( protectRoute);
 Router.get("/contacts", getAllContacts);
 Router.get("/chats", getAllChats);
 Router.get("/:id", getMessageByUserId);
