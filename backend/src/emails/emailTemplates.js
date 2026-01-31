@@ -1,91 +1,50 @@
 export function createWelcomeEmailTemplate(name, clientURL) {
   return `
-   <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Email</title>
-</head>
-<body style="margin:0; padding:0; background:#0b0f1a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;">
-
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#0b0f1a; padding:60px 0;">
-  <tr>
-    <td align="center">
-
-      <!-- Main Card -->
-      <table width="600" cellpadding="0" cellspacing="0" style="background:#111827; border-radius:14px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.6);">
-
-        <!-- Header -->
-        <tr>
-          <td align="center" style="padding:40px 30px 20px;">
-            <img
-              src="https://your-cdn.com/logo-or-avatar.png"
-              width="88"
-              height="88"
-              alt="YourApp"
-              style="border-radius:50%; border:3px solid #1f2937;"
-            />
-            <h1 style="color:#ffffff; font-size:22px; margin:20px 0 5px; font-weight:600;">
-              YourApp
-            </h1>
-            <p style="color:#9ca3af; font-size:14px; margin:0;">
-              Secure Web Platform
-            </p>
-          </td>
-        </tr>
-
-        <!-- Divider -->
-        <tr>
-          <td style="padding:0 40px;">
-            <hr style="border:none; border-top:1px solid #1f2937;">
-          </td>
-        </tr>
-
-        <!-- Content -->
-        <tr>
-          <td style="padding:30px 40px; color:#d1d5db; font-size:15px; line-height:1.8;">
-            <p style="margin-top:0;">Hello, ${name} </p>
-
-            <p>
-              Welcome to <strong style="color:#ffffff;">YourApp</strong>.  
-              Your account has been successfully created and is now ready to use.
-            </p>
-
-            <p>
-              We focus on security, performance, and a clean experience for our users.
-            </p>
-
-            <!-- Button -->
-            <div style="text-align:center; margin:35px 0;">
-              <a href="${clientURL}"
-                 style="background:#2563eb; color:#ffffff; text-decoration:none; padding:14px 36px; border-radius:10px; font-size:15px; font-weight:600; display:inline-block;">
-                Open Chat Application
-              </a>
-            </div>
-
-            <p style="font-size:13px; color:#9ca3af;">
-              If you did not request this email, please ignore it.
-            </p>
-          </td>
-        </tr>
-
-        <!-- Footer -->
-        <tr>
-          <td align="center" style="background:#0b1220; padding:20px; font-size:12px; color:#6b7280;">
-            © 2026 YourApp. All rights reserved<br/>
-            <span style="color:#4b5563;">noreply@yourapp.com</span>
-          </td>
-        </tr>
-
-      </table>
-
-    </td>
-  </tr>
-</table>
-
-</body>
-</html>
-
- `;
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Messenger</title>
+  </head>
+  <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
+    <div style="background: linear-gradient(to right, #36D1DC, #5B86E5); padding: 30px; text-align: center; border-radius: 12px 12px 0 0;">
+      <img src="https://img.freepik.com/free-vector/hand-drawn-message-element-vector-cute-sticker_53876-118344.jpg?t=st=1741295028~exp=1741298628~hmac=0d076f885d7095f0b5bc8d34136cd6d64749455f8cb5f29a924281bafc11b96c&w=1480" alt="Messenger Logo" style="width: 80px; height: 80px; margin-bottom: 20px; border-radius: 50%; background-color: white; padding: 10px;">
+      <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 500;">Welcome to Messenger!</h1>
+    </div>
+    <div style="background-color: #ffffff; padding: 35px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+      <p style="font-size: 18px; color: #5B86E5;"><strong>Hello ${name},</strong></p>
+      <p>We're excited to have you join our messaging platform! Messenger connects you with friends, family, and colleagues in real-time, no matter where they are.</p>
+      
+      <div style="background-color: #f8f9fa; padding: 25px; border-radius: 10px; margin: 25px 0; border-left: 4px solid #36D1DC;">
+        <p style="font-size: 16px; margin: 0 0 15px 0;"><strong>Get started in just a few steps:</strong></p>
+        <ul style="padding-left: 20px; margin: 0;">
+          <li style="margin-bottom: 10px;">Set up your profile picture</li>
+          <li style="margin-bottom: 10px;">Find and add your contacts</li>
+          <li style="margin-bottom: 10px;">Start a conversation</li>
+          <li style="margin-bottom: 0;">Share photos, videos, and more</li>
+        </ul>
+      </div>
+      
+      <div style="text-align: center; margin: 30px 0;">
+        <a href=${clientURL} style="background: linear-gradient(to right, #36D1DC, #5B86E5); color: white; text-decoration: none; padding: 12px 30px; border-radius: 50px; font-weight: 500; display: inline-block;">Open Messenger</a>
+      </div>
+      
+      <p style="margin-bottom: 5px;">If you need any help or have questions, we're always here to assist you.</p>
+      <p style="margin-top: 0;">Happy messaging!</p>
+      
+      <p style="margin-top: 25px; margin-bottom: 0;">Best regards,<br>The Messenger Team</p>
+    </div>
+    
+    <div style="text-align: center; padding: 20px; color: #999; font-size: 12px;">
+      <p>© 2025 Messenger. All rights reserved.</p>
+      <p>
+        <a href="#" style="color: #5B86E5; text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+        <a href="#" style="color: #5B86E5; text-decoration: none; margin: 0 10px;">Terms of Service</a>
+        <a href="#" style="color: #5B86E5; text-decoration: none; margin: 0 10px;">Contact Us</a>
+      </p>
+    </div>
+  </body>
+  </html>
+  `;
 }
