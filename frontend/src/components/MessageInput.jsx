@@ -30,7 +30,7 @@ function MessageInput() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file.type.startsWith("image/")) {
-      toast.error("Please select an image file");
+      toast.error("لطفاً یک فایل تصویری انتخاب کنید");
       return;
     }
 
@@ -74,7 +74,7 @@ function MessageInput() {
             isSoundEnabled && playRandomKeyStrokeSound();
           }}
           className="flex-1 bg-slate-800/50 border border-slate-700/50 rounded-lg py-2 px-4"
-          placeholder="Type your message..."
+          placeholder="پیام خود را بنویسید..."
         />
 
         <input

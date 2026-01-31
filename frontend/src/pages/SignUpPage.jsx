@@ -17,22 +17,22 @@ function SignUpPage() {
     <div className="w-full flex items-center justify-center p-4 bg-slate-900">
       <div className="relative w-full max-w-6xl md:h-[800px] h-[650px]">
         <BorderAnimatedContainer>
-          <div className="w-full flex flex-col md:flex-row">
+          <div className="w-full flex flex-col md:flex-row-reverse">
             {/* FORM CLOUMN - LEFT SIDE */}
-            <div className="md:w-1/2 p-8 flex items-center justify-center md:border-r border-slate-600/30">
+            <div className="md:w-1/2 p-8 flex items-center justify-center md:border-l border-slate-600/30">
               <div className="w-full max-w-md">
                 {/* HEADING TEXT */}
                 <div className="text-center mb-8">
                   <MessageCircleIcon className="w-12 h-12 mx-auto text-slate-400 mb-4" />
-                  <h2 className="text-2xl font-bold text-slate-200 mb-2">Create Account</h2>
-                  <p className="text-slate-400">Sign up for a new account</p>
+                  <h2 className="text-2xl font-bold text-slate-200 mb-2">ایجاد حساب</h2>
+                  <p className="text-slate-400">برای ساخت حساب جدید ثبت‌نام کنید</p>
                 </div>
 
                 {/* FORM */}
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* FULL NAME */}
                   <div>
-                    <label className="auth-input-label">Full Name</label>
+                    <label className="auth-input-label">نام و نام خانوادگی</label>
                     <div className="relative">
                       <UserIcon className="auth-input-icon" />
 
@@ -41,14 +41,14 @@ function SignUpPage() {
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                         className="input"
-                        placeholder="John Doe"
+                        placeholder="نام و نام‌خانوادگی"
                       />
                     </div>
                   </div>
 
                   {/* EMAIL INPUT */}
                   <div>
-                    <label className="auth-input-label">Email</label>
+                    <label className="auth-input-label">ایمیل</label>
                     <div className="relative">
                       <MailIcon className="auth-input-icon" />
 
@@ -57,14 +57,14 @@ function SignUpPage() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="input"
-                        placeholder="johndoe@gmail.com"
+                        placeholder="example@gmail.com"
                       />
                     </div>
                   </div>
 
                   {/* PASSWORD INPUT */}
                   <div>
-                    <label className="auth-input-label">Password</label>
+                    <label className="auth-input-label">رمز عبور</label>
                     <div className="relative">
                       <LockIcon className="auth-input-icon" />
 
@@ -73,7 +73,7 @@ function SignUpPage() {
                         value={formData.password}
                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         className="input"
-                        placeholder="Enter your password"
+                        placeholder="رمز عبور خود را وارد کنید"
                       />
                     </div>
                   </div>
@@ -83,14 +83,14 @@ function SignUpPage() {
                     {isSigningUp ? (
                       <LoaderIcon className="w-full h-5 animate-spin text-center" />
                     ) : (
-                      "Create Account"
+                      "ایجاد حساب"
                     )}
                   </button>
                 </form>
 
                 <div className="mt-6 text-center">
                   <Link to="/login" className="auth-link">
-                    Already have an account? Login
+                    قبلا حساب دارید؟ ورود
                   </Link>
                 </div>
               </div>
@@ -101,16 +101,16 @@ function SignUpPage() {
               <div>
                 <img
                   src="/signup.png"
-                  alt="People using mobile devices"
+                  alt="افرادی که از دستگاه‌های همراه استفاده می‌کنند"
                   className="w-full h-auto object-contain"
                 />
                 <div className="mt-6 text-center">
-                  <h3 className="text-xl font-medium text-cyan-400">Start Your Journey Today</h3>
+                  <h3 className="text-xl font-medium text-cyan-400">همین امروز شروع کنید</h3>
 
                   <div className="mt-4 flex justify-center gap-4">
-                    <span className="auth-badge">Free</span>
-                    <span className="auth-badge">Easy Setup</span>
-                    <span className="auth-badge">Private</span>
+                    <span className="auth-badge">رایگان</span>
+                    <span className="auth-badge">نصب آسان</span>
+                    <span className="auth-badge">خصوصی</span>
                   </div>
                 </div>
               </div>
