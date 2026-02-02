@@ -15,12 +15,12 @@
 }
 
 .input {
-    @apply w-full bg-white/90 border border-slate-300 rounded-lg py-2 pl-10 pr-4 text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent;
+    @apply w-full bg-white/90 border border-slate-300 rounded-lg py-2 pl-4 pr-10 text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent;
     font-family: 'Dana', sans-serif;
 }
 
 .auth-input-icon {
-    @apply absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 size-5;
+    @apply absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 size-5;
 }
 
 /* Buttons and badges */
