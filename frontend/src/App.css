@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@property --border-angle {
+.@property --border-angle {
     inherits: false;
     initial-value: 0deg;
     syntax: "<angle>";
@@ -10,7 +10,7 @@
 
 /* Inputs */
 .auth-input-lable {
-    @apply block text-sm font-medium text-slate-700 mb-2; /* متن تیره‌تر */
+    @apply block text-sm font-medium text-slate-700 mb-2; /* darker text */
     font-family: 'Dana', sans-serif;
 }
 

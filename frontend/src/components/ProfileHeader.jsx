@@ -38,11 +38,11 @@ function ProfileHeader() {
             >
               <img
                 src={selectedImg || authUser.profilePic || "/avatar.png"}
-                alt="تصویر کاربر"
+                alt="User image"
                 className="size-full object-cover"
               />
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                <span className="text-white text-xs">تغییر</span>
+                <span className="text-white text-xs">Change</span>
               </div>
             </button>
 
@@ -61,7 +61,7 @@ function ProfileHeader() {
               {authUser.fullName}
             </h3>
 
-            <p className="text-slate-400 text-xs">آنلاین</p>
+            <p className="text-slate-400 text-xs">Online</p>
           </div>
         </div>
 
@@ -71,7 +71,6 @@ function ProfileHeader() {
           <button
             className="text-slate-400 hover:text-slate-200 transition-colors"
             onClick={logout}
-            aria-label="خروج"
           >
             <LogOutIcon className="size-5" />
           </button>
@@ -85,7 +84,6 @@ function ProfileHeader() {
               mouseClickSound.play().catch((error) => console.log("Audio play failed:", error));
               toggleSound();
             }}
-            aria-label={isSoundEnabled ? "صدا: روشن" : "صدا: خاموش"}
           >
             {isSoundEnabled ? (
               <Volume2Icon className="size-5" />
