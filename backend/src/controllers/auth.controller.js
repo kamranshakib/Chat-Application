@@ -6,8 +6,8 @@ import { ENV } from "../lib/env.js";
 import cloudinary from "../lib/cloudinary.js";
 
 export const signup = async (req, res) => {
-  const { fullName, email, password } = req.body;
- 
+  let { fullName, email, password } = req.body;
+
   try {
     if (!fullName || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
@@ -17,7 +17,10 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "Password must be at least 6 characters" });
     }
 
-    // check if emailis valid: regex
+    // normalize email
+    email = email.trim().toLowerCase();
+
+    // check if email is valid
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ message: "Invalid email format" });
@@ -26,7 +29,6 @@ export const signup = async (req, res) => {
     const user = await User.findOne({ email });
     if (user) return res.status(400).json({ message: "Email already exists" });
 
-    // 123456 => $dnjasdkasj_?dmsakmk
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -36,31 +38,22 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
 
-    if (newUser) {
-      // before CR:
-      // generateToken(newUser._id, res);
-      // await newUser.save();
+    const savedUser = await newUser.save();
+    generateToken(savedUser._id, res);
 
-      // after CR:
-      // Persist user first, then issue auth cookie
-      const savedUser = await newUser.save();
-      generateToken(savedUser._id, res);
+    res.status(201).json({
+      _id: savedUser._id,
+      fullName: savedUser.fullName,
+      email: savedUser.email,
+      profilePic: savedUser.profilePic,
+    });
 
-      res.status(201).json({
-        _id: newUser._id,
-        fullName: newUser.fullName,
-        email: newUser.email,
-        profilePic: newUser.profilePic,
-      });
-
-      try {
-        await sendWelcomeEmail(savedUser.email, savedUser.fullName, ENV.CLIENT_URL);
-      } catch (error) {
-        console.error("Failed to send welcome email:", error);
-      }
-    } else {
-      res.status(400).json({ message: "Invalid user data" });
+    try {
+      await sendWelcomeEmail(savedUser.email, savedUser.fullName, ENV.CLIENT_URL);
+    } catch (error) {
+      console.error("Failed to send welcome email:", error);
     }
+
   } catch (error) {
     console.log("Error in signup controller:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -68,16 +61,18 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required" });
   }
 
   try {
+    // normalize email
+    email = email.trim().toLowerCase();
+
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
-    // never tell the client which one is incorrect: password or email
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
