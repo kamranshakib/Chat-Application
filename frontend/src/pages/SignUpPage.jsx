@@ -100,7 +100,7 @@ function SignUpPage() {
             <div className="hidden md:w-1/2 md:flex items-center justify-center p-6 bg-gradient-to-bl from-slate-800/20 to-transparent">
               <div>
                 <img
-                  src="/signup.png"
+                  src="/signUp.png"
                   alt="People using mobile devices"
                   className="w-full h-auto object-contain"
                 />
