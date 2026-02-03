@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useChatStore } from "../store/useChatStore";
 import UsersLoadingSkeleton from "./UsersLoadingSkeleton";
 import NoChatsFound from "./NoChatsFound";
@@ -20,8 +20,14 @@ function ChatsList() {
       {chats.map((chat) => (
         <div
           key={chat._id}
-          className="bg-cyan-500/10 p-4 rounded-lg cursor-pointer hover:bg-cyan-500/20 transition-colors"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") setSelectedUser(chat);
+          }}
+          className="bg-cyan-500/10 p-4 rounded-lg cursor-pointer hover:bg-cyan-500/20 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500"
           onClick={() => setSelectedUser(chat)}
+          aria-label={`Open chat with ${chat.fullName}`}
         >
           <div className="flex items-center gap-3">
             <div className={`avatar ${onlineUsers.includes(chat._id) ? "online" : "offline"}`}>
@@ -36,4 +42,4 @@ function ChatsList() {
     </>
   );
 }
-export default ChatsList;
+export default React.memo(ChatsList);
