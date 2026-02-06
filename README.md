@@ -23,7 +23,7 @@ Demo: https://chat-application-9ven.onrender.com/
 
 ### Frontend:
 - React.js
-- CSS / Tailwind / Bootstrap (optional)
+- TailwindCSS 
 
 ### Backend:
 - Node.js
