@@ -10,7 +10,6 @@ import { ENV } from "./lib/env.js";
 import { app, server } from "./lib/socket.js";
 
 const __dirname = path.resolve();
-
 const PORT = ENV.PORT || 3000;
 
 app.use(express.json({ limit: "5mb" })); // req.body
@@ -26,6 +25,7 @@ if (ENV.NODE_ENV === "production") {
 
   app.get("*", (_, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+
   });
 }
 

@@ -46,10 +46,10 @@ function MessageInput() {
 
   return (
     <div
-      className="border-t border-slate-700/50 bg-slate-900/40"
+      className="border-t border-slate-700/50 bg-slate-900/40 md:static"
       style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
-      <div className="sticky bottom-0 bg-transparent p-3">
+      <div className="md:relative fixed bottom-0 left-0 right-0 z-30 bg-slate-900/40 p-3">
       {imagePreview && (
         <div className="max-w-3xl mx-auto mb-3 flex items-center">
           <div className="relative">

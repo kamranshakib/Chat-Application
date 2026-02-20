@@ -4,6 +4,11 @@ import daisyui from "daisyui";
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      sm: '480px',
+      md: '768px',
+      lg: '1024px',
+    },
     extend: {
       animation: {
         border: "border 4s linear infinite",
